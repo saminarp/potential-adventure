@@ -1,0 +1,48 @@
+<h1>Login Form</h1>
+<div *ngIf="loginError">
+  <b>Error: </b> {{ loginError }} - Either username or password is wrong
+</div>
+<div *ngIf="!name.valid">
+  Username can only contain numbers and letters
+  <div *ngIf="name.errors?.['required']">Username cannot be blank</div>
+</div>
+
+<div *ngIf="!password.valid">
+  Password can only contain numbers and letters
+  <div *ngIf="password.errors?.['required']">
+    <strong>Error: </strong>Password cannot be blank
+  </div>
+</div>
+<br />
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+  <div class="mb-4">
+    <label>Username:</label>
+    <input
+      type="name"
+      class="form-control"
+      id="username-input"
+      name="userName"
+      [(ngModel)]="userLogin.userName"
+      required
+      pattern="[a-zA-Z0-9]*"
+      #name="ngModel"
+    />
+  </div>
+  <div class="mb-4">
+    <label>Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password-input"
+      name="password"
+      [(ngModel)]="userLogin.password"
+      required
+      pattern="[a-zA-Z0-9]*"
+      #password="ngModel"
+    />
+  </div>
+  <div class="mb-3">
+    <input type="submit" class="btn btn-primary" />
+  </div>
+</form>
+{{ userLogin | json }}
